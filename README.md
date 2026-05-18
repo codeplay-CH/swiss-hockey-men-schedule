@@ -6,11 +6,15 @@ Abonnierbarer Kalender mit Spielplan und Resultaten der Schweizer Eishockey-Nati
 
 ## Kalender abonnieren
 
-Nach Aktivierung von GitHub Pages (Branch `main`, Ordner `/public`):
+GitHub Pages (Organisation `codeplay-CH`):
 
 ```
-https://<github-user>.github.io/iihf-swiss-hockey-men-schedule/calendar.ics
+https://codeplay-ch.github.io/iihf-swiss-hockey-men-schedule/calendar.ics
 ```
+
+Übersicht: https://codeplay-ch.github.io/iihf-swiss-hockey-men-schedule/
+
+Wichtig: Die Root-URL ohne `calendar.ics` liefert keine Kalenderdatei.
 
 ### Google Kalender
 
