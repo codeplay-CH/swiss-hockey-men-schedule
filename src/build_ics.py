@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import re
 from datetime import datetime, timedelta
 from pathlib import Path
 from zoneinfo import ZoneInfo
@@ -10,12 +11,38 @@ from src.models import Game
 
 SIHF_SCHEDULE_URL = "https://m.sihf.ch/de/national-teams/mens-national-team/schedule/"
 
+DATE_RANGE_PREFIX = re.compile(
+    r"^\d{2}\.\d{2}\.\d{4}\s*-\s*\d{2}\.\d{2}\.\d{4}\s+"
+)
+
+TOURNAMENT_ALIASES: tuple[tuple[str, str], ...] = (
+    ("IIHF Ice Hockey World Championship", "WM 2026"),
+    ("Olympic Winter Games", "Olympia 2026"),
+    ("Euro Hockey Tour", "EHT"),
+    ("SWISS Ice Hockey Games", "Swiss Ice Hockey Games"),
+    ("WM-Vorbereitung Week", "WM-Vorbereitung"),
+    ("Fortuna Hockey Games", "Fortuna Hockey Games"),
+    ("Beijer Hockey Games", "Beijer Hockey Games"),
+    ("Prospect Camp", "Prospect Camp"),
+    ("Media Day", "Media Day"),
+)
+
+
+def _tournament_label(tournament: str) -> str:
+    name = DATE_RANGE_PREFIX.sub("", tournament).strip()
+    for needle, label in TOURNAMENT_ALIASES:
+        if needle in name:
+            return label
+    if len(name) > 42:
+        return f"{name[:39]}…"
+    return name
+
 
 def _format_summary(game: Game) -> str:
-    base = f"{game.home_team} – {game.away_team}"
+    matchup = f"{game.home_team} – {game.away_team}"
     if game.score_home is not None and game.score_away is not None:
-        return f"{base} ({game.score_home}:{game.score_away})"
-    return base
+        matchup = f"{matchup} ({game.score_home}:{game.score_away})"
+    return f"{_tournament_label(game.tournament)} · {matchup}"
 
 
 def _format_description(game: Game) -> str:
