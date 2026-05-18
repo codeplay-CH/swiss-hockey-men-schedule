@@ -1,0 +1,70 @@
+from __future__ import annotations
+
+from datetime import datetime, timedelta
+from pathlib import Path
+from zoneinfo import ZoneInfo
+
+from icalendar import Calendar, Event
+
+from src.models import Game
+
+SIHF_SCHEDULE_URL = "https://m.sihf.ch/de/national-teams/mens-national-team/schedule/"
+
+
+def _format_summary(game: Game) -> str:
+    base = f"{game.home_team} – {game.away_team}"
+    if game.score_home is not None and game.score_away is not None:
+        return f"{base} ({game.score_home}:{game.score_away})"
+    return base
+
+
+def _format_description(game: Game) -> str:
+    lines = [
+        f"Turnier: {game.tournament}",
+        f"Ort: {game.venue}",
+        f"Status: {game.status}",
+        f"SIHF: {SIHF_SCHEDULE_URL}",
+    ]
+    if game.iihf_event_id == 969:
+        lines.append("IIHF: https://www.iihf.com/de_ch/events/2026/wm/schedule")
+    elif game.iihf_event_id == 991:
+        lines.append("IIHF: https://www.iihf.com/en/events/2026/olympic-m/schedule")
+    return "\n".join(lines)
+
+
+def build_calendar(games: list[Game], calendar_name: str, tz_name: str) -> bytes:
+    cal = Calendar()
+    cal.add("prodid", "-//iihf-swiss-hockey-men-schedule//NONSGML//EN")
+    cal.add("version", "2.0")
+    cal.add("calscale", "GREGORIAN")
+    cal.add("name", calendar_name)
+    cal.add("x-wr-calname", calendar_name)
+    cal.add("x-wr-timezone", tz_name)
+
+    local_tz = ZoneInfo(tz_name)
+    utc = ZoneInfo("UTC")
+    now = datetime.now(utc)
+
+    for game in games:
+        starts = datetime.fromisoformat(game.starts_at)
+        if starts.tzinfo is None:
+            starts = starts.replace(tzinfo=local_tz)
+        starts_utc = starts.astimezone(utc)
+        ends_utc = starts_utc + timedelta(hours=3)
+
+        event = Event()
+        event.add("uid", f"{game.id}@iihf-swiss-hockey-men-schedule")
+        event.add("dtstamp", now)
+        event.add("dtstart", starts_utc)
+        event.add("dtend", ends_utc)
+        event.add("summary", _format_summary(game))
+        event.add("description", _format_description(game))
+        event.add("location", game.venue)
+        cal.add_component(event)
+
+    return cal.to_ical()
+
+
+def write_ics(games: list[Game], output_path: Path, calendar_name: str, tz_name: str) -> None:
+    output_path.parent.mkdir(parents=True, exist_ok=True)
+    output_path.write_bytes(build_calendar(games, calendar_name, tz_name))

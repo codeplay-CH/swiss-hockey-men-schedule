@@ -1,0 +1,18 @@
+sihf:
+  schedule_url: https://m.sihf.ch/de/national-teams/mens-national-team/schedule/
+  user_agent: iihf-swiss-hockey-men-schedule/1.0
+
+iihf_events:
+  - id: 969
+    name: WM 2026
+    hydra_url: https://stats.iihf.com/Hydra/969/
+    schedule_url: https://www.iihf.com/de_ch/events/2026/wm/schedule
+  - id: 991
+    name: Olympia 2026
+    hydra_url: https://stats.iihf.com/Hydra/991/
+    schedule_url: https://www.iihf.com/en/events/2026/olympic-m/schedule
+
+timezone: Europe/Zurich
+calendar_name: Schweiz Herren-Nati
+include_camps: true
+match_time_tolerance_minutes: 30
