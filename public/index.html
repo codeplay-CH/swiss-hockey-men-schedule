@@ -8,6 +8,30 @@
     body { font-family: system-ui, sans-serif; max-width: 36rem; margin: 3rem auto; padding: 0 1rem; line-height: 1.5; }
     code { background: #f4f4f4; padding: 0.15rem 0.35rem; border-radius: 4px; word-break: break-all; }
     a { color: #c00; }
+    .url-box {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      align-items: flex-start;
+      margin: 0.5rem 0 1rem;
+    }
+    .url-box code {
+      flex: 1 1 12rem;
+      display: block;
+      padding: 0.5rem 0.65rem;
+    }
+    button {
+      font: inherit;
+      cursor: pointer;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      padding: 0.45rem 0.85rem;
+      background: #fff;
+    }
+    button:hover { background: #f8f8f8; }
+    button:focus-visible { outline: 2px solid #c00; outline-offset: 2px; }
+    button.copied { border-color: #2a7; color: #2a7; }
+    #copy-status { min-height: 1.25rem; margin: 0 0 1rem; font-size: 0.9rem; color: #2a7; }
   </style>
 </head>
 <body>
@@ -15,10 +39,56 @@
   <p>ICS-Kalender zum Abonnieren in Google Kalender oder Apple Kalender:</p>
   <p><a href="calendar.ics"><code>calendar.ics</code></a></p>
   <p>URL kopieren:</p>
-  <p><code id="url"></code></p>
+  <div class="url-box">
+    <code id="url"></code>
+    <button type="button" id="copy" aria-describedby="url">In Zwischenablage kopieren</button>
+  </div>
+  <p id="copy-status" role="status" aria-live="polite"></p>
   <script>
-    const url = new URL('calendar.ics', window.location.href).href;
-    document.getElementById('url').textContent = url;
+    const calendarUrl = new URL('calendar.ics', window.location.href).href;
+    const urlEl = document.getElementById('url');
+    const copyBtn = document.getElementById('copy');
+    const statusEl = document.getElementById('copy-status');
+
+    urlEl.textContent = calendarUrl;
+
+    function fallbackCopy(text) {
+      const textarea = document.createElement('textarea');
+      textarea.value = text;
+      textarea.setAttribute('readonly', '');
+      textarea.style.position = 'absolute';
+      textarea.style.left = '-9999px';
+      document.body.appendChild(textarea);
+      textarea.select();
+      const ok = document.execCommand('copy');
+      document.body.removeChild(textarea);
+      return ok;
+    }
+
+    async function copyUrl() {
+      let ok = false;
+      try {
+        await navigator.clipboard.writeText(calendarUrl);
+        ok = true;
+      } catch {
+        ok = fallbackCopy(calendarUrl);
+      }
+
+      if (ok) {
+        copyBtn.textContent = 'Kopiert!';
+        copyBtn.classList.add('copied');
+        statusEl.textContent = 'URL wurde kopiert.';
+        setTimeout(() => {
+          copyBtn.textContent = 'In Zwischenablage kopieren';
+          copyBtn.classList.remove('copied');
+          statusEl.textContent = '';
+        }, 2000);
+      } else {
+        statusEl.textContent = 'Kopieren nicht möglich – URL manuell markieren.';
+      }
+    }
+
+    copyBtn.addEventListener('click', copyUrl);
   </script>
   <p><small>Kein offizielles SIHF/IIHF-Angebot. <a href="https://github.com/codeplay-CH/iihf-swiss-hockey-men-schedule">GitHub</a></small></p>
 </body>
