@@ -87,7 +87,9 @@ Code, Kommentare und Commit-Messages: **Englisch**. Nutzer-sichtbare Texte (Kale
 
 ## Konfiguration
 
-[`config/events.yaml`](config/events.yaml) – SIHF-URL, IIHF-Event-IDs, Zeitzone, Camps ein-/ausblenden, Schwellwerte für `health_check`.
+[`config/events.yaml`](config/events.yaml) – SIHF-URL, IIHF-Event-IDs (optional, Override), `iihf_discovery` für automatische Event-ID-Suche, Zeitzone, Camps, `health_check`.
+
+**IIHF Auto-Discovery:** Erkennt an SIHF-Turniernamen (WM, Olympia), welche IIHF-Events nötig sind, und sucht fehlende IDs über Hydra-Seitentitel (`iihf_discovery` in der YAML). Manuelle `iihf_events`-Einträge haben Vorrang; `schedule_url` dort setzt den Link in der ICS-Beschreibung.
 
 Der Build bricht mit Exit-Code 1 ab, wenn SIHF oder der Merge zu wenige Spiele liefern (Standard: jeweils mindestens 10). In der Action-Log erscheinen Zähler pro Quelle.
 

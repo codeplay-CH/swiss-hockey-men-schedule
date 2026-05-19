@@ -5,12 +5,29 @@ sihf:
 iihf_events:
   - id: 969
     name: WM 2026
+    year: 2026
+    kinds: [wm]
     hydra_url: https://stats.iihf.com/Hydra/969/
     schedule_url: https://www.iihf.com/de_ch/events/2026/wm/schedule
   - id: 991
     name: Olympia 2026
+    year: 2026
+    kinds: [olympic]
     hydra_url: https://stats.iihf.com/Hydra/991/
     schedule_url: https://www.iihf.com/en/events/2026/olympic-m/schedule
+
+# Auto-discover IIHF event IDs from Hydra page titles when SIHF lists a
+# tournament that is not covered by iihf_events above.
+iihf_discovery:
+  enabled: true
+  id_min: 900
+  id_max: 1050
+  seed_ids: [969, 991]
+  tournament_patterns:
+    - needle: "IIHF Ice Hockey World Championship"
+      kind: wm
+    - needle: "Olympic Winter Games"
+      kind: olympic
 
 timezone: Europe/Zurich
 calendar_name: Schweiz Herren-Nati

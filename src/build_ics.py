@@ -45,21 +45,29 @@ def _format_summary(game: Game) -> str:
     return f"{_tournament_label(game.tournament)} · {matchup}"
 
 
-def _format_description(game: Game) -> str:
+def _format_description(
+    game: Game,
+    iihf_schedule_urls: dict[int, str] | None = None,
+) -> str:
     lines = [
         f"Turnier: {game.tournament}",
         f"Ort: {game.venue}",
         f"Status: {game.status}",
         f"SIHF: {SIHF_SCHEDULE_URL}",
     ]
-    if game.iihf_event_id == 969:
-        lines.append("IIHF: https://www.iihf.com/de_ch/events/2026/wm/schedule")
-    elif game.iihf_event_id == 991:
-        lines.append("IIHF: https://www.iihf.com/en/events/2026/olympic-m/schedule")
+    if game.iihf_event_id and iihf_schedule_urls:
+        schedule_url = iihf_schedule_urls.get(game.iihf_event_id, "").strip()
+        if schedule_url:
+            lines.append(f"IIHF: {schedule_url}")
     return "\n".join(lines)
 
 
-def build_calendar(games: list[Game], calendar_name: str, tz_name: str) -> bytes:
+def build_calendar(
+    games: list[Game],
+    calendar_name: str,
+    tz_name: str,
+    iihf_schedule_urls: dict[int, str] | None = None,
+) -> bytes:
     cal = Calendar()
     cal.add("prodid", "-//iihf-swiss-hockey-men-schedule//NONSGML//EN")
     cal.add("version", "2.0")
@@ -85,13 +93,21 @@ def build_calendar(games: list[Game], calendar_name: str, tz_name: str) -> bytes
         event.add("dtstart", starts_utc)
         event.add("dtend", ends_utc)
         event.add("summary", _format_summary(game))
-        event.add("description", _format_description(game))
+        event.add("description", _format_description(game, iihf_schedule_urls))
         event.add("location", game.venue)
         cal.add_component(event)
 
     return cal.to_ical()
 
 
-def write_ics(games: list[Game], output_path: Path, calendar_name: str, tz_name: str) -> None:
+def write_ics(
+    games: list[Game],
+    output_path: Path,
+    calendar_name: str,
+    tz_name: str,
+    iihf_schedule_urls: dict[int, str] | None = None,
+) -> None:
     output_path.parent.mkdir(parents=True, exist_ok=True)
-    output_path.write_bytes(build_calendar(games, calendar_name, tz_name))
+    output_path.write_bytes(
+        build_calendar(games, calendar_name, tz_name, iihf_schedule_urls)
+    )

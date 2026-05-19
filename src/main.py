@@ -6,6 +6,7 @@ from pathlib import Path
 
 from src.build_ics import write_ics
 from src.config_loader import ROOT, load_config
+from src.discover_iihf import resolve_iihf_events, schedule_urls_by_event_id
 from src.fetch_iihf import fetch_all_iihf_games
 from src.fetch_sihf import fetch_sihf_schedule
 from src.health import log_build_stats, validate_build
@@ -29,8 +30,17 @@ def main() -> int:
         tz_name=tz_name,
         include_camps=include_camps,
     )
+    iihf_events = resolve_iihf_events(config, sihf_games, user_agent)
+    discovered = [event for event in iihf_events if event.get("discovered")]
+    if discovered:
+        for event in discovered:
+            print(
+                f"Discovered IIHF event {event['id']}: "
+                f"{event.get('hydra_title', event['name'])}"
+            )
+
     iihf_games = fetch_all_iihf_games(
-        events=config.get("iihf_events", []),
+        events=iihf_events,
         user_agent=user_agent,
         tz_name=tz_name,
     )
@@ -54,6 +64,7 @@ def main() -> int:
         ICS_PATH,
         calendar_name=config.get("calendar_name", "Schweiz Herren-Nati"),
         tz_name=tz_name,
+        iihf_schedule_urls=schedule_urls_by_event_id(iihf_events),
     )
 
     print(f"Wrote {len(games)} games to {DATA_PATH} and {ICS_PATH}")
