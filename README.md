@@ -81,6 +81,10 @@ git restore data/games.json public/calendar.ics
 
 Bei Push/PR prüft die Workflow **Commit hygiene**, dass nur der Actions-Bot diese Dateien ändert.
 
+## Entwicklung
+
+Code, Kommentare und Commit-Messages: **Englisch**. Nutzer-sichtbare Texte (Kalender-ICS, Landing Page, README): **Deutsch**.
+
 ## Konfiguration
 
 [`config/events.yaml`](config/events.yaml) – SIHF-URL, IIHF-Event-IDs, Zeitzone, Camps ein-/ausblenden, Schwellwerte für `health_check`.
