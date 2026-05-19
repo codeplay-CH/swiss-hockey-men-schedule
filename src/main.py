@@ -8,6 +8,7 @@ from src.build_ics import write_ics
 from src.config_loader import ROOT, load_config
 from src.fetch_iihf import fetch_all_iihf_games
 from src.fetch_sihf import fetch_sihf_schedule
+from src.health import log_build_stats, validate_build
 from src.merge import merge_games
 
 DATA_PATH = ROOT / "data" / "games.json"
@@ -34,6 +35,13 @@ def main() -> int:
         tz_name=tz_name,
     )
     games = merge_games(sihf_games, iihf_games, tolerance_minutes=tolerance)
+
+    log_build_stats(sihf_games, iihf_games, games, config)
+    errors = validate_build(sihf_games, games, config)
+    if errors:
+        for message in errors:
+            print(f"ERROR: {message}", file=sys.stderr)
+        return 1
 
     DATA_PATH.parent.mkdir(parents=True, exist_ok=True)
     DATA_PATH.write_text(

@@ -53,7 +53,9 @@ Ausgabe: `data/games.json`, `public/calendar.ics`
 
 ## Konfiguration
 
-[`config/events.yaml`](config/events.yaml) – SIHF-URL, IIHF-Event-IDs, Zeitzone, Camps ein-/ausblenden.
+[`config/events.yaml`](config/events.yaml) – SIHF-URL, IIHF-Event-IDs, Zeitzone, Camps ein-/ausblenden, Schwellwerte für `health_check`.
+
+Der Build bricht mit Exit-Code 1 ab, wenn SIHF oder der Merge zu wenige Spiele liefern (Standard: jeweils mindestens 10). In der Action-Log erscheinen Zähler pro Quelle.
 
 ## Lizenz
 

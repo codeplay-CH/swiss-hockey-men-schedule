@@ -33,7 +33,7 @@ jobs:
         run: pip install -r requirements.txt
 
       - name: Build calendar
-        run: python -m src.main
+        run: python -m src.main  # exits 1 if health_check fails (no commit/deploy)
 
       - name: Commit data changes
         run: |

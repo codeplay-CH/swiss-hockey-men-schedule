@@ -16,3 +16,7 @@ timezone: Europe/Zurich
 calendar_name: Schweiz Herren-Nati
 include_camps: true
 match_time_tolerance_minutes: 30
+
+health_check:
+  min_sihf_games: 10
+  min_merged_games: 10
