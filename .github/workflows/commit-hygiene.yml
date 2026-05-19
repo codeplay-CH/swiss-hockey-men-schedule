@@ -1,0 +1,30 @@
+name: Commit hygiene
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+jobs:
+  check-generated-files:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Verify calendar data only from Actions bot
+        run: |
+          chmod +x scripts/check-commit-hygiene.sh
+          if [[ "${{ github.event_name }}" == "pull_request" ]]; then
+            RANGE="${{ github.event.pull_request.base.sha }}..${{ github.event.pull_request.head.sha }}"
+          else
+            BEFORE="${{ github.event.before }}"
+            AFTER="${{ github.sha }}"
+            if [[ "$BEFORE" == "0000000000000000000000000000000000000000" ]]; then
+              RANGE="$AFTER"
+            else
+              RANGE="$BEFORE..$AFTER"
+            fi
+          fi
+          ./scripts/check-commit-hygiene.sh --range "$RANGE"

@@ -56,7 +56,30 @@ pip install -r requirements-dev.txt
 pytest -q
 ```
 
-Ausgabe: `data/games.json`, `public/calendar.ics`
+`python -m src.main` schreibt lokal `data/games.json` und `public/calendar.ics`. Diese Dateien **nicht** in eigenen Commits mitschicken — die GitHub Action aktualisiert sie alle 30 Minuten.
+
+### Commit-Hygiene
+
+| Wer | Was committen |
+|-----|----------------|
+| Du | `src/`, `config/`, `tests/`, Workflow, README, … |
+| GitHub Action | `data/games.json`, `public/calendar.ics` |
+
+Vor dem Commit (optional, einmalig Hook aktivieren):
+
+```bash
+git config core.hooksPath .githooks
+```
+
+Der Pre-commit-Hook blockiert `games.json` / `calendar.ics` im Staging. Manuell prüfen: `./scripts/check-commit-hygiene.sh --staged`
+
+Nach lokalem Testlauf Änderungen an den Kalenderdateien verwerfen:
+
+```bash
+git restore data/games.json public/calendar.ics
+```
+
+Bei Push/PR prüft die Workflow **Commit hygiene**, dass nur der Actions-Bot diese Dateien ändert.
 
 ## Konfiguration
 
