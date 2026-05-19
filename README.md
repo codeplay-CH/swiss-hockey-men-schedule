@@ -49,6 +49,13 @@ pip install -r requirements.txt
 python -m src.main
 ```
 
+## Tests
+
+```bash
+pip install -r requirements-dev.txt
+pytest -q
+```
+
 Ausgabe: `data/games.json`, `public/calendar.ics`
 
 ## Konfiguration
