@@ -1,4 +1,4 @@
-# Schweiz Herren-Nati – ICS-Kalender
+# Swiss Hockey Men – ICS-Kalender
 
 Abonnierbarer Kalender mit Spielplan und Resultaten der Schweizer Eishockey-Nationalmannschaft (Herren).
 

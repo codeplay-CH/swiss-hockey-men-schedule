@@ -62,7 +62,7 @@ def main() -> int:
     write_ics(
         games,
         ICS_PATH,
-        calendar_name=config.get("calendar_name", "Schweiz Herren-Nati"),
+        calendar_name=config.get("calendar_name", "Swiss Hockey Men"),
         tz_name=tz_name,
         iihf_schedule_urls=schedule_urls_by_event_id(iihf_events),
     )

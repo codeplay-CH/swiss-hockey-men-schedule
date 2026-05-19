@@ -30,7 +30,7 @@ iihf_discovery:
       kind: olympic
 
 timezone: Europe/Zurich
-calendar_name: Schweiz Herren-Nati
+calendar_name: Swiss Hockey Men
 include_camps: true
 match_time_tolerance_minutes: 30
 
