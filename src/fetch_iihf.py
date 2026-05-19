@@ -87,7 +87,9 @@ def _parse_realtime_game(raw: dict, event_id: int, tournament: str, tz_name: str
 
 
 def _parse_hydra_row(cells: list[str], event_id: int, tournament: str, tz_name: str) -> IihfGame | None:
-    if len(cells) < 8:
+    # Completed rows: date, venue, round, home, "-", away, score, status (8+).
+    # Scheduled rows: same but only "Scheduled" (or similar) after away (7).
+    if len(cells) < 7:
         return None
 
     date_match = DATE_TIME_RE.search(cells[0])
@@ -107,7 +109,13 @@ def _parse_hydra_row(cells: list[str], event_id: int, tournament: str, tz_name: 
 
     result_idx = home_idx + 3
     result_text = cells[result_idx] if len(cells) > result_idx else ""
-    status_text = cells[result_idx + 1] if len(cells) > result_idx + 1 else "scheduled"
+    if len(cells) > result_idx + 1:
+        status_text = cells[result_idx + 1]
+    elif SCORE_RE.match(result_text.strip()):
+        status_text = "game completed"
+    else:
+        status_text = result_text
+        result_text = ""
 
     score_home: int | None = None
     score_away: int | None = None
@@ -119,6 +127,8 @@ def _parse_hydra_row(cells: list[str], event_id: int, tournament: str, tz_name: 
     status = status_text.strip().lower().replace(" ", "_")
     if status == "game_completed":
         status = "completed"
+    elif status == "pre_game_ended":
+        status = "upcoming"
 
     starts_local = _parse_local_datetime(date_match.group(1), date_match.group(2), tz_name)
     game_number = round_info.split()[0] if round_info else None
