@@ -1,7 +1,7 @@
 from __future__ import annotations
 
+import re
 from datetime import datetime
-from zoneinfo import ZoneInfo
 
 from src.fetch_iihf import IihfGame
 from src.models import Game
@@ -52,12 +52,34 @@ def _find_iihf_match(
     return candidates[0]
 
 
+def _iihf_to_game(iihf: IihfGame) -> Game:
+    slug = re.sub(r"[^a-z0-9]+", "-", iihf.tournament.lower()).strip("-")[:40]
+    game_id = f"iihf-{iihf.date}-{iihf.home_team}-{iihf.away_team}-{slug}"
+    return Game(
+        id=game_id,
+        date=iihf.date,
+        time=iihf.time,
+        starts_at=iihf.starts_at,
+        home_team=iihf.home_team,
+        away_team=iihf.away_team,
+        venue=iihf.venue,
+        tournament=iihf.tournament,
+        score_home=iihf.score_home if _has_score(iihf) else None,
+        score_away=iihf.score_away if _has_score(iihf) else None,
+        status=iihf.status,
+        iihf_game_id=iihf.game_id,
+        iihf_event_id=iihf.event_id,
+        source="iihf",
+    )
+
+
 def merge_games(
     sihf_games: list[Game],
     iihf_games: list[IihfGame],
     tolerance_minutes: int = 30,
 ) -> list[Game]:
     merged: list[Game] = []
+    matched_iihf: set[int] = set()
 
     for game in sihf_games:
         if not game.involves_sui():
@@ -66,6 +88,7 @@ def merge_games(
         output = Game(**game.to_dict())
         match = _find_iihf_match(output, iihf_games, tolerance_minutes)
         if match:
+            matched_iihf.add(id(match))
             if match.game_id:
                 output.iihf_game_id = match.game_id
             output.iihf_event_id = match.event_id
@@ -79,6 +102,13 @@ def merge_games(
             output.source = "sihf+iihf"
 
         merged.append(output)
+
+    for iihf in iihf_games:
+        if id(iihf) in matched_iihf:
+            continue
+        if iihf.home_team != "SUI" and iihf.away_team != "SUI":
+            continue
+        merged.append(_iihf_to_game(iihf))
 
     merged.sort(key=lambda g: g.starts_at)
     return merged
