@@ -424,9 +424,9 @@
     "away_team": "FIN",
     "venue": "Swiss Life Arena",
     "tournament": "15.05.2026 - 31.05.2026 2026 IIHF Ice Hockey World Championship in Zurich & Fribourg / SUI",
-    "score_home": 2,
+    "score_home": 4,
     "score_away": 2,
-    "status": "live",
+    "status": "final",
     "iihf_game_id": "12911",
     "iihf_event_id": 969,
     "source": "sihf+iihf"
