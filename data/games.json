@@ -440,9 +440,9 @@
     "away_team": "SWE",
     "venue": "Swiss Life Arena",
     "tournament": "WM 2026",
-    "score_home": null,
-    "score_away": null,
-    "status": "upcoming",
+    "score_home": 1,
+    "score_away": 1,
+    "status": "live",
     "iihf_game_id": "12915",
     "iihf_event_id": 969,
     "source": "iihf"
