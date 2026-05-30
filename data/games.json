@@ -456,10 +456,26 @@
     "away_team": "NOR",
     "venue": "Swiss Life Arena",
     "tournament": "WM 2026",
-    "score_home": 5,
+    "score_home": 6,
     "score_away": 0,
-    "status": "live",
+    "status": "final",
     "iihf_game_id": "12917",
+    "iihf_event_id": 969,
+    "source": "iihf"
+  },
+  {
+    "id": "iihf-2026-05-31-SUI-W(SF)-wm-2026",
+    "date": "2026-05-31",
+    "time": "20:20",
+    "starts_at": "2026-05-31T20:20:00+02:00",
+    "home_team": "SUI",
+    "away_team": "W(SF)",
+    "venue": "Swiss Life Arena",
+    "tournament": "WM 2026",
+    "score_home": null,
+    "score_away": null,
+    "status": "upcoming",
+    "iihf_game_id": "12920",
     "iihf_event_id": 969,
     "source": "iihf"
   }
