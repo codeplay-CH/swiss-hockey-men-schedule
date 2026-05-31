@@ -470,12 +470,12 @@
     "starts_at": "2026-05-31T20:20:00+02:00",
     "home_team": "SUI",
     "away_team": "FIN",
-    "venue": "Swiss Life Arena",
+    "venue": "Zurich Swiss Life Arena",
     "tournament": "WM 2026",
     "score_home": 0,
     "score_away": 1,
-    "status": "f(ot)",
-    "iihf_game_id": "12920",
+    "status": "completed",
+    "iihf_game_id": null,
     "iihf_event_id": 969,
     "source": "iihf"
   }
