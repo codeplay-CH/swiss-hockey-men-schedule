@@ -432,51 +432,51 @@
     "source": "sihf+iihf"
   },
   {
-    "id": "iihf-2026-05-28-SUI-SWE-wm-2026",
+    "id": "sihf-2026-05-28-SUI-SWE-15-05-2026-31-05-2026-2026-iihf-ice-hock",
     "date": "2026-05-28",
     "time": "20:20",
     "starts_at": "2026-05-28T20:20:00+02:00",
     "home_team": "SUI",
     "away_team": "SWE",
     "venue": "Zurich Swiss Life Arena",
-    "tournament": "WM 2026",
+    "tournament": "15.05.2026 - 31.05.2026 2026 IIHF Ice Hockey World Championship in Zurich & Fribourg / SUI",
     "score_home": 3,
     "score_away": 1,
     "status": "completed",
     "iihf_game_id": null,
     "iihf_event_id": 969,
-    "source": "iihf"
+    "source": "sihf+iihf"
   },
   {
-    "id": "iihf-2026-05-30-SUI-NOR-wm-2026",
+    "id": "sihf-2026-05-30-SUI-NOR-15-05-2026-31-05-2026-2026-iihf-ice-hock",
     "date": "2026-05-30",
     "time": "15:20",
     "starts_at": "2026-05-30T15:20:00+02:00",
     "home_team": "SUI",
     "away_team": "NOR",
     "venue": "Zurich Swiss Life Arena",
-    "tournament": "WM 2026",
+    "tournament": "15.05.2026 - 31.05.2026 2026 IIHF Ice Hockey World Championship in Zurich & Fribourg / SUI",
     "score_home": 6,
     "score_away": 0,
     "status": "completed",
     "iihf_game_id": null,
     "iihf_event_id": 969,
-    "source": "iihf"
+    "source": "sihf+iihf"
   },
   {
-    "id": "iihf-2026-05-31-SUI-FIN-wm-2026",
+    "id": "sihf-2026-05-31-SUI-FIN-15-05-2026-31-05-2026-2026-iihf-ice-hock",
     "date": "2026-05-31",
     "time": "20:20",
     "starts_at": "2026-05-31T20:20:00+02:00",
     "home_team": "SUI",
     "away_team": "FIN",
     "venue": "Zurich Swiss Life Arena",
-    "tournament": "WM 2026",
+    "tournament": "15.05.2026 - 31.05.2026 2026 IIHF Ice Hockey World Championship in Zurich & Fribourg / SUI",
     "score_home": 0,
     "score_away": 1,
     "status": "completed",
     "iihf_game_id": null,
     "iihf_event_id": 969,
-    "source": "iihf"
+    "source": "sihf+iihf"
   }
 ]
