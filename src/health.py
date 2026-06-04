@@ -43,13 +43,6 @@ def validate_build(
 
     errors: list[str] = []
 
-    if not sihf_games:
-        errors.append("SIHF schedule is empty (parser or source may be broken)")
-    elif len(sihf_games) < min_sihf:
-        errors.append(
-            f"SIHF returned only {len(sihf_games)} games (minimum {min_sihf})"
-        )
-
     if not merged_games:
         errors.append("Merged schedule is empty")
     elif len(merged_games) < min_merged:
@@ -58,3 +51,26 @@ def validate_build(
         )
 
     return errors
+
+
+def build_warnings(
+    sihf_games: list[Game],
+    merged_games: list[Game],
+    config: dict[str, Any],
+) -> list[str]:
+    health = config.get("health_check") or {}
+    min_sihf = int(health.get("min_sihf_games", 10))
+    min_merged = int(health.get("min_merged_games", 10))
+
+    if len(merged_games) < min_merged:
+        return []
+
+    if not sihf_games:
+        return ["SIHF schedule is empty; continuing because merged schedule is healthy"]
+    if len(sihf_games) < min_sihf:
+        return [
+            f"SIHF returned only {len(sihf_games)} games (minimum {min_sihf}); "
+            "continuing because merged schedule is healthy"
+        ]
+
+    return []
