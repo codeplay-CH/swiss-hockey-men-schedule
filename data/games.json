@@ -478,5 +478,37 @@
     "iihf_game_id": null,
     "iihf_event_id": 969,
     "source": "sihf+iihf"
+  },
+  {
+    "id": "sihf-2026-07-30-SUI RED-SUI WHITE-27-07-2026-31-07-2026-prospect-camp-in-d",
+    "date": "2026-07-30",
+    "time": "16:30",
+    "starts_at": "2026-07-30T16:30:00+02:00",
+    "home_team": "SUI RED",
+    "away_team": "SUI WHITE",
+    "venue": "Davos / SUI",
+    "tournament": "27.07.2026 - 31.07.2026 Prospect Camp in Davos",
+    "score_home": null,
+    "score_away": null,
+    "status": "scheduled",
+    "iihf_game_id": null,
+    "iihf_event_id": null,
+    "source": "sihf"
+  },
+  {
+    "id": "sihf-2026-07-31-SUI WHITE-SUI RED-27-07-2026-31-07-2026-prospect-camp-in-d",
+    "date": "2026-07-31",
+    "time": "10:15",
+    "starts_at": "2026-07-31T10:15:00+02:00",
+    "home_team": "SUI WHITE",
+    "away_team": "SUI RED",
+    "venue": "Davos / SUI",
+    "tournament": "27.07.2026 - 31.07.2026 Prospect Camp in Davos",
+    "score_home": null,
+    "score_away": null,
+    "status": "scheduled",
+    "iihf_game_id": null,
+    "iihf_event_id": null,
+    "source": "sihf"
   }
 ]
