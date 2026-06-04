@@ -61,7 +61,17 @@ def test_load_previous_sihf_games_strips_iihf_overlay(tmp_path) -> None:
 def test_apply_sihf_fallback_uses_previous_when_live_below_minimum(tmp_path) -> None:
     path = tmp_path / "games.json"
     path.write_text(
-        json.dumps([_game("previous-1").to_dict(), _game("previous-2").to_dict()]),
+        json.dumps(
+            [
+                _game("previous-1").to_dict(),
+                _game(
+                    "previous-2",
+                    date="2026-05-16",
+                    home_team="SUI",
+                    away_team="SWE",
+                ).to_dict(),
+            ]
+        ),
         encoding="utf-8",
     )
 
