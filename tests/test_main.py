@@ -1,18 +1,29 @@
 import json
 
-from src.main import apply_sihf_fallback, load_previous_sihf_games
+from src.main import (
+    apply_sihf_fallback,
+    load_previous_sihf_games,
+    merge_sihf_fallback_games,
+)
 from src.models import Game
 
 
-def _game(game_id: str, source: str = "sihf") -> Game:
+def _game(
+    game_id: str,
+    source: str = "sihf",
+    date: str = "2026-05-15",
+    home_team: str = "SUI",
+    away_team: str = "FIN",
+    venue: str = "Arena",
+) -> Game:
     return Game(
         id=game_id,
-        date="2026-05-15",
+        date=date,
         time="20:20",
-        starts_at="2026-05-15T20:20:00+02:00",
-        home_team="SUI",
-        away_team="FIN",
-        venue="Arena",
+        starts_at=f"{date}T20:20:00+02:00",
+        home_team=home_team,
+        away_team=away_team,
+        venue=venue,
         tournament="WM",
         score_home=3,
         score_away=2,
@@ -61,7 +72,27 @@ def test_apply_sihf_fallback_uses_previous_when_live_below_minimum(tmp_path) -> 
     )
 
     assert fallback_count == 2
-    assert [game.id for game in games] == ["previous-1", "previous-2"]
+    assert [game.id for game in games] == ["live-1", "previous-2"]
+
+
+def test_merge_sihf_fallback_keeps_new_live_games() -> None:
+    previous_games = [
+        _game("previous-1"),
+        _game("previous-2", date="2026-05-16", home_team="SUI", away_team="SWE"),
+    ]
+    live_games = [
+        _game("live-replacement", venue="Updated Arena"),
+        _game("live-new", date="2026-07-30", home_team="SUI Red", away_team="SUI White"),
+    ]
+
+    games = merge_sihf_fallback_games(previous_games, live_games)
+
+    assert [game.id for game in games] == [
+        "live-replacement",
+        "previous-2",
+        "live-new",
+    ]
+    assert games[0].venue == "Updated Arena"
 
 
 def test_apply_sihf_fallback_keeps_live_when_healthy(tmp_path) -> None:

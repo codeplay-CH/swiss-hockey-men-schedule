@@ -12,6 +12,7 @@ from src.fetch_sihf import fetch_sihf_schedule
 from src.health import build_warnings, log_build_stats, validate_build
 from src.merge import merge_games
 from src.models import Game
+from src.teams import teams_key
 
 DATA_PATH = ROOT / "data" / "games.json"
 ICS_PATH = ROOT / "public" / "calendar.ics"
@@ -46,6 +47,37 @@ def load_previous_sihf_games(path: Path = DATA_PATH) -> list[Game]:
     return games
 
 
+def _sihf_match_key(game: Game) -> tuple[str, frozenset[str]]:
+    return game.date, teams_key(game.home_team, game.away_team)
+
+
+def merge_sihf_fallback_games(
+    previous_sihf_games: list[Game],
+    live_sihf_games: list[Game],
+) -> list[Game]:
+    merged = list(previous_sihf_games)
+    id_to_index = {game.id: index for index, game in enumerate(merged)}
+    match_to_index = {
+        _sihf_match_key(game): index for index, game in enumerate(merged)
+    }
+
+    for live_game in live_sihf_games:
+        index = id_to_index.get(live_game.id)
+        if index is None:
+            index = match_to_index.get(_sihf_match_key(live_game))
+
+        if index is None:
+            index = len(merged)
+            merged.append(live_game)
+        else:
+            merged[index] = live_game
+
+        id_to_index[live_game.id] = index
+        match_to_index[_sihf_match_key(live_game)] = index
+
+    return merged
+
+
 def apply_sihf_fallback(
     live_sihf_games: list[Game],
     config: dict,
@@ -57,7 +89,10 @@ def apply_sihf_fallback(
 
     previous_sihf_games = load_previous_sihf_games(previous_path)
     if len(previous_sihf_games) >= min_sihf:
-        return previous_sihf_games, len(previous_sihf_games)
+        return (
+            merge_sihf_fallback_games(previous_sihf_games, live_sihf_games),
+            len(previous_sihf_games),
+        )
 
     return live_sihf_games, None
 
@@ -80,7 +115,8 @@ def main() -> int:
     if fallback_count is not None:
         print(
             f"WARNING: SIHF live returned only {len(live_sihf_games)} games; "
-            f"using {fallback_count} previous SIHF games from {DATA_PATH}"
+            f"using {fallback_count} previous SIHF games from {DATA_PATH} "
+            f"plus {len(live_sihf_games)} live SIHF games"
         )
 
     iihf_events = resolve_iihf_events(config, sihf_games, user_agent)
