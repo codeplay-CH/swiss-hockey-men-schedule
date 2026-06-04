@@ -29,7 +29,7 @@ class Game:
         return cls(**data)
 
     def involves_sui(self) -> bool:
-        return "SUI" in {self.home_team, self.away_team} or "SUI " in {
-            self.home_team,
-            self.away_team,
-        }
+        return any(
+            team == "SUI" or team.startswith("SUI ")
+            for team in (self.home_team, self.away_team)
+        )

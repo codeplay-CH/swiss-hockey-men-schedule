@@ -9,11 +9,92 @@ from src.config_loader import ROOT, load_config
 from src.discover_iihf import resolve_iihf_events, schedule_urls_by_event_id
 from src.fetch_iihf import fetch_all_iihf_games
 from src.fetch_sihf import fetch_sihf_schedule
-from src.health import log_build_stats, validate_build
+from src.health import build_warnings, log_build_stats, validate_build
 from src.merge import merge_games
+from src.models import Game
+from src.teams import teams_key
 
 DATA_PATH = ROOT / "data" / "games.json"
 ICS_PATH = ROOT / "public" / "calendar.ics"
+
+
+def _min_sihf_games(config: dict) -> int:
+    health = config.get("health_check") or {}
+    return int(health.get("min_sihf_games", 10))
+
+
+def _strip_iihf_overlay(game: Game) -> Game:
+    output = Game(**game.to_dict())
+    output.score_home = None
+    output.score_away = None
+    output.status = "scheduled"
+    output.iihf_game_id = None
+    output.iihf_event_id = None
+    output.source = "sihf"
+    return output
+
+
+def load_previous_sihf_games(path: Path = DATA_PATH) -> list[Game]:
+    if not path.exists():
+        return []
+
+    data = json.loads(path.read_text(encoding="utf-8"))
+    games: list[Game] = []
+    for item in data:
+        if item.get("source") not in {"sihf", "sihf+iihf"}:
+            continue
+        games.append(_strip_iihf_overlay(Game.from_dict(item)))
+    return games
+
+
+def _sihf_match_key(game: Game) -> tuple[str, frozenset[str]]:
+    return game.date, teams_key(game.home_team, game.away_team)
+
+
+def merge_sihf_fallback_games(
+    previous_sihf_games: list[Game],
+    live_sihf_games: list[Game],
+) -> list[Game]:
+    merged = list(previous_sihf_games)
+    id_to_index = {game.id: index for index, game in enumerate(merged)}
+    match_to_index = {
+        _sihf_match_key(game): index for index, game in enumerate(merged)
+    }
+
+    for live_game in live_sihf_games:
+        index = id_to_index.get(live_game.id)
+        if index is None:
+            index = match_to_index.get(_sihf_match_key(live_game))
+
+        if index is None:
+            index = len(merged)
+            merged.append(live_game)
+        else:
+            merged[index] = live_game
+
+        id_to_index[live_game.id] = index
+        match_to_index[_sihf_match_key(live_game)] = index
+
+    return merged
+
+
+def apply_sihf_fallback(
+    live_sihf_games: list[Game],
+    config: dict,
+    previous_path: Path = DATA_PATH,
+) -> tuple[list[Game], int | None]:
+    min_sihf = _min_sihf_games(config)
+    if len(live_sihf_games) >= min_sihf:
+        return live_sihf_games, None
+
+    previous_sihf_games = load_previous_sihf_games(previous_path)
+    if len(previous_sihf_games) >= min_sihf:
+        return (
+            merge_sihf_fallback_games(previous_sihf_games, live_sihf_games),
+            len(previous_sihf_games),
+        )
+
+    return live_sihf_games, None
 
 
 def main() -> int:
@@ -24,12 +105,20 @@ def main() -> int:
     include_camps = bool(config.get("include_camps", True))
     tolerance = int(config.get("match_time_tolerance_minutes", 30))
 
-    sihf_games = fetch_sihf_schedule(
+    live_sihf_games = fetch_sihf_schedule(
         url=sihf_cfg["schedule_url"],
         user_agent=user_agent,
         tz_name=tz_name,
         include_camps=include_camps,
     )
+    sihf_games, fallback_count = apply_sihf_fallback(live_sihf_games, config)
+    if fallback_count is not None:
+        print(
+            f"WARNING: SIHF live returned only {len(live_sihf_games)} games; "
+            f"using {fallback_count} previous SIHF games from {DATA_PATH} "
+            f"plus {len(live_sihf_games)} live SIHF games"
+        )
+
     iihf_events = resolve_iihf_events(config, sihf_games, user_agent)
     discovered = [event for event in iihf_events if event.get("discovered")]
     if discovered:
@@ -47,6 +136,9 @@ def main() -> int:
     games = merge_games(sihf_games, iihf_games, tolerance_minutes=tolerance)
 
     log_build_stats(sihf_games, iihf_games, games, config)
+    for message in build_warnings(live_sihf_games, games, config):
+        print(f"WARNING: {message}")
+
     errors = validate_build(sihf_games, games, config)
     if errors:
         for message in errors:
