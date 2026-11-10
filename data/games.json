@@ -558,5 +558,53 @@
     "iihf_game_id": null,
     "iihf_event_id": null,
     "source": "sihf"
+  },
+  {
+    "id": "sihf-2026-12-10-SWE-SUI-07-12-2026-13-12-2026-swiss-ice-hockey-g",
+    "date": "2026-12-10",
+    "time": "19:45",
+    "starts_at": "2026-12-10T19:45:00+01:00",
+    "home_team": "SWE",
+    "away_team": "SUI",
+    "venue": "Swiss Life Arena, Zürich",
+    "tournament": "07.12.2026 - 13.12.2026: SWISS Ice Hockey Games",
+    "score_home": null,
+    "score_away": null,
+    "status": "scheduled",
+    "iihf_game_id": null,
+    "iihf_event_id": null,
+    "source": "sihf"
+  },
+  {
+    "id": "sihf-2026-12-12-SUI-CZE-07-12-2026-13-12-2026-swiss-ice-hockey-g",
+    "date": "2026-12-12",
+    "time": "18:00",
+    "starts_at": "2026-12-12T18:00:00+01:00",
+    "home_team": "SUI",
+    "away_team": "CZE",
+    "venue": "Swiss Life Arena, Zürich",
+    "tournament": "07.12.2026 - 13.12.2026: SWISS Ice Hockey Games",
+    "score_home": null,
+    "score_away": null,
+    "status": "scheduled",
+    "iihf_game_id": null,
+    "iihf_event_id": null,
+    "source": "sihf"
+  },
+  {
+    "id": "sihf-2026-12-13-SUI-FIN-07-12-2026-13-12-2026-swiss-ice-hockey-g",
+    "date": "2026-12-13",
+    "time": "15:45",
+    "starts_at": "2026-12-13T15:45:00+01:00",
+    "home_team": "SUI",
+    "away_team": "FIN",
+    "venue": "Swiss Life Arena, Zürich",
+    "tournament": "07.12.2026 - 13.12.2026: SWISS Ice Hockey Games",
+    "score_home": null,
+    "score_away": null,
+    "status": "scheduled",
+    "iihf_game_id": null,
+    "iihf_event_id": null,
+    "source": "sihf"
   }
 ]
