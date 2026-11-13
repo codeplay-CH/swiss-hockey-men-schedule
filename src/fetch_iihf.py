@@ -209,6 +209,12 @@ def fetch_realtime_games(
     headers = {"User-Agent": user_agent}
     url = REALTIME_URL.format(event_id=event_id)
     response = httpx.get(url, headers=headers, timeout=30.0)
+    if response.status_code >= 400:
+        print(
+            f"WARNING: IIHF realtime {response.status_code} for event {event_id}, "
+            "skipping live scores"
+        )
+        return []
     response.raise_for_status()
     payload = response.json()
     if not isinstance(payload, list):
