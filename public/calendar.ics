@@ -9,7 +9,7 @@ BEGIN:VEVENT
 SUMMARY:Olympia 2026 · SUI – FRA
 DTSTART:20260212T111000Z
 DTEND:20260212T141000Z
-DTSTAMP:20261114T015506Z
+DTSTAMP:20261114T082325Z
 UID:iihf-2026-02-12-SUI-FRA-olympia-2026@iihf-swiss-hockey-men-schedule
 DESCRIPTION:Turnier: Olympia 2026\nOrt: Milano Milano Santagiulia IHO Aren
  a\nStatus: scheduled\nSIHF: https://www.sihf.ch/de/nationalteams/mens-nati
@@ -21,7 +21,7 @@ BEGIN:VEVENT
 SUMMARY:Olympia 2026 · CAN – SUI
 DTSTART:20260213T201000Z
 DTEND:20260213T231000Z
-DTSTAMP:20261114T015506Z
+DTSTAMP:20261114T082325Z
 UID:iihf-2026-02-13-CAN-SUI-olympia-2026@iihf-swiss-hockey-men-schedule
 DESCRIPTION:Turnier: Olympia 2026\nOrt: Milano Milano Santagiulia IHO Aren
  a\nStatus: scheduled\nSIHF: https://www.sihf.ch/de/nationalteams/mens-nati
@@ -33,7 +33,7 @@ BEGIN:VEVENT
 SUMMARY:Olympia 2026 · SUI – CZE
 DTSTART:20260215T111000Z
 DTEND:20260215T141000Z
-DTSTAMP:20261114T015506Z
+DTSTAMP:20261114T082325Z
 UID:iihf-2026-02-15-SUI-CZE-olympia-2026@iihf-swiss-hockey-men-schedule
 DESCRIPTION:Turnier: Olympia 2026\nOrt: Milano Milano Santagiulia IHO Aren
  a\nStatus: scheduled\nSIHF: https://www.sihf.ch/de/nationalteams/mens-nati
@@ -45,7 +45,7 @@ BEGIN:VEVENT
 SUMMARY:WM 2026 · USA – SUI (1:3)
 DTSTART:20260515T182000Z
 DTEND:20260515T212000Z
-DTSTAMP:20261114T015506Z
+DTSTAMP:20261114T082325Z
 UID:iihf-2026-05-15-USA-SUI-wm-2026@iihf-swiss-hockey-men-schedule
 DESCRIPTION:Turnier: WM 2026\nOrt: Zurich Swiss Life Arena\nStatus: comple
  ted\nSIHF: https://www.sihf.ch/de/nationalteams/mens-national-team/program
@@ -56,7 +56,7 @@ BEGIN:VEVENT
 SUMMARY:WM 2026 · SUI – LAT (4:2)
 DTSTART:20260516T182000Z
 DTEND:20260516T212000Z
-DTSTAMP:20261114T015506Z
+DTSTAMP:20261114T082325Z
 UID:iihf-2026-05-16-SUI-LAT-wm-2026@iihf-swiss-hockey-men-schedule
 DESCRIPTION:Turnier: WM 2026\nOrt: Zurich Swiss Life Arena\nStatus: comple
  ted\nSIHF: https://www.sihf.ch/de/nationalteams/mens-national-team/program
@@ -67,7 +67,7 @@ BEGIN:VEVENT
 SUMMARY:WM 2026 · GER – SUI (1:6)
 DTSTART:20260518T182000Z
 DTEND:20260518T212000Z
-DTSTAMP:20261114T015506Z
+DTSTAMP:20261114T082325Z
 UID:iihf-2026-05-18-GER-SUI-wm-2026@iihf-swiss-hockey-men-schedule
 DESCRIPTION:Turnier: WM 2026\nOrt: Zurich Swiss Life Arena\nStatus: comple
  ted\nSIHF: https://www.sihf.ch/de/nationalteams/mens-national-team/program
@@ -78,7 +78,7 @@ BEGIN:VEVENT
 SUMMARY:WM 2026 · AUT – SUI (0:9)
 DTSTART:20260520T142000Z
 DTEND:20260520T172000Z
-DTSTAMP:20261114T015506Z
+DTSTAMP:20261114T082325Z
 UID:iihf-2026-05-20-AUT-SUI-wm-2026@iihf-swiss-hockey-men-schedule
 DESCRIPTION:Turnier: WM 2026\nOrt: Zurich Swiss Life Arena\nStatus: comple
  ted\nSIHF: https://www.sihf.ch/de/nationalteams/mens-national-team/program
@@ -89,7 +89,7 @@ BEGIN:VEVENT
 SUMMARY:WM 2026 · SUI – GBR (4:1)
 DTSTART:20260521T182000Z
 DTEND:20260521T212000Z
-DTSTAMP:20261114T015506Z
+DTSTAMP:20261114T082325Z
 UID:iihf-2026-05-21-SUI-GBR-wm-2026@iihf-swiss-hockey-men-schedule
 DESCRIPTION:Turnier: WM 2026\nOrt: Zurich Swiss Life Arena\nStatus: comple
  ted\nSIHF: https://www.sihf.ch/de/nationalteams/mens-national-team/program
@@ -100,7 +100,7 @@ BEGIN:VEVENT
 SUMMARY:WM 2026 · SUI – HUN (9:0)
 DTSTART:20260523T142000Z
 DTEND:20260523T172000Z
-DTSTAMP:20261114T015506Z
+DTSTAMP:20261114T082325Z
 UID:iihf-2026-05-23-SUI-HUN-wm-2026@iihf-swiss-hockey-men-schedule
 DESCRIPTION:Turnier: WM 2026\nOrt: Zurich Swiss Life Arena\nStatus: comple
  ted\nSIHF: https://www.sihf.ch/de/nationalteams/mens-national-team/program
@@ -111,7 +111,7 @@ BEGIN:VEVENT
 SUMMARY:WM 2026 · SUI – FIN (4:2)
 DTSTART:20260526T182000Z
 DTEND:20260526T212000Z
-DTSTAMP:20261114T015506Z
+DTSTAMP:20261114T082325Z
 UID:iihf-2026-05-26-SUI-FIN-wm-2026@iihf-swiss-hockey-men-schedule
 DESCRIPTION:Turnier: WM 2026\nOrt: Zurich Swiss Life Arena\nStatus: comple
  ted\nSIHF: https://www.sihf.ch/de/nationalteams/mens-national-team/program
@@ -122,7 +122,7 @@ BEGIN:VEVENT
 SUMMARY:WM 2026 · SUI – SWE (3:1)
 DTSTART:20260528T182000Z
 DTEND:20260528T212000Z
-DTSTAMP:20261114T015506Z
+DTSTAMP:20261114T082325Z
 UID:iihf-2026-05-28-SUI-SWE-wm-2026@iihf-swiss-hockey-men-schedule
 DESCRIPTION:Turnier: WM 2026\nOrt: Zurich Swiss Life Arena\nStatus: comple
  ted\nSIHF: https://www.sihf.ch/de/nationalteams/mens-national-team/program
@@ -133,7 +133,7 @@ BEGIN:VEVENT
 SUMMARY:WM 2026 · SUI – NOR (6:0)
 DTSTART:20260530T132000Z
 DTEND:20260530T162000Z
-DTSTAMP:20261114T015506Z
+DTSTAMP:20261114T082325Z
 UID:iihf-2026-05-30-SUI-NOR-wm-2026@iihf-swiss-hockey-men-schedule
 DESCRIPTION:Turnier: WM 2026\nOrt: Zurich Swiss Life Arena\nStatus: comple
  ted\nSIHF: https://www.sihf.ch/de/nationalteams/mens-national-team/program
@@ -144,7 +144,7 @@ BEGIN:VEVENT
 SUMMARY:WM 2026 · SUI – FIN (0:1)
 DTSTART:20260531T182000Z
 DTEND:20260531T212000Z
-DTSTAMP:20261114T015506Z
+DTSTAMP:20261114T082325Z
 UID:iihf-2026-05-31-SUI-FIN-wm-2026@iihf-swiss-hockey-men-schedule
 DESCRIPTION:Turnier: WM 2026\nOrt: Zurich Swiss Life Arena\nStatus: comple
  ted\nSIHF: https://www.sihf.ch/de/nationalteams/mens-national-team/program
@@ -155,7 +155,7 @@ BEGIN:VEVENT
 SUMMARY:Prospect Camp · SUI RED – SUI WHITE
 DTSTART:20260730T143000Z
 DTEND:20260730T173000Z
-DTSTAMP:20261114T015506Z
+DTSTAMP:20261114T082325Z
 UID:sihf-2026-07-30-SUI RED-SUI WHITE-27-07-2026-31-07-2026-prospect-camp-
  in-d@iihf-swiss-hockey-men-schedule
 DESCRIPTION:Turnier: 27.07.2026 - 31.07.2026: Prospect Camp in Davos\nOrt:
@@ -167,7 +167,7 @@ BEGIN:VEVENT
 SUMMARY:Prospect Camp · SUI WHITE – SUI RED
 DTSTART:20260731T081500Z
 DTEND:20260731T111500Z
-DTSTAMP:20261114T015506Z
+DTSTAMP:20261114T082325Z
 UID:sihf-2026-07-31-SUI WHITE-SUI RED-27-07-2026-31-07-2026-prospect-camp-
  in-d@iihf-swiss-hockey-men-schedule
 DESCRIPTION:Turnier: 27.07.2026 - 31.07.2026: Prospect Camp in Davos\nOrt:
@@ -179,7 +179,7 @@ BEGIN:VEVENT
 SUMMARY:EHT · SUI – FIN
 DTSTART:20261105T163000Z
 DTEND:20261105T193000Z
-DTSTAMP:20261114T015506Z
+DTSTAMP:20261114T082325Z
 UID:sihf-2026-11-05-SUI-FIN-02-11-2026-09-11-2026-nocco-hockey-games@iihf-
  swiss-hockey-men-schedule
 DESCRIPTION:Turnier: 02.11.2026 - 09.11.2026: NOCCO Hockey Games in Helsin
@@ -191,7 +191,7 @@ BEGIN:VEVENT
 SUMMARY:EHT · SWE – SUI
 DTSTART:20261107T123000Z
 DTEND:20261107T153000Z
-DTSTAMP:20261114T015506Z
+DTSTAMP:20261114T082325Z
 UID:sihf-2026-11-07-SWE-SUI-02-11-2026-09-11-2026-nocco-hockey-games@iihf-
  swiss-hockey-men-schedule
 DESCRIPTION:Turnier: 02.11.2026 - 09.11.2026: NOCCO Hockey Games in Helsin
@@ -203,7 +203,7 @@ BEGIN:VEVENT
 SUMMARY:EHT · CZE – SUI
 DTSTART:20261108T123000Z
 DTEND:20261108T153000Z
-DTSTAMP:20261114T015506Z
+DTSTAMP:20261114T082325Z
 UID:sihf-2026-11-08-CZE-SUI-02-11-2026-09-11-2026-nocco-hockey-games@iihf-
  swiss-hockey-men-schedule
 DESCRIPTION:Turnier: 02.11.2026 - 09.11.2026: NOCCO Hockey Games in Helsin
@@ -215,7 +215,7 @@ BEGIN:VEVENT
 SUMMARY:Swiss Ice Hockey Games · SWE – SUI
 DTSTART:20261210T184500Z
 DTEND:20261210T214500Z
-DTSTAMP:20261114T015506Z
+DTSTAMP:20261114T082325Z
 UID:sihf-2026-12-10-SWE-SUI-07-12-2026-13-12-2026-swiss-ice-hockey-g@iihf-
  swiss-hockey-men-schedule
 DESCRIPTION:Turnier: 07.12.2026 - 13.12.2026: SWISS Ice Hockey Games\nOrt:
@@ -227,7 +227,7 @@ BEGIN:VEVENT
 SUMMARY:Swiss Ice Hockey Games · SUI – CZE
 DTSTART:20261212T170000Z
 DTEND:20261212T200000Z
-DTSTAMP:20261114T015506Z
+DTSTAMP:20261114T082325Z
 UID:sihf-2026-12-12-SUI-CZE-07-12-2026-13-12-2026-swiss-ice-hockey-g@iihf-
  swiss-hockey-men-schedule
 DESCRIPTION:Turnier: 07.12.2026 - 13.12.2026: SWISS Ice Hockey Games\nOrt:
@@ -239,7 +239,7 @@ BEGIN:VEVENT
 SUMMARY:Swiss Ice Hockey Games · SUI – FIN
 DTSTART:20261213T144500Z
 DTEND:20261213T174500Z
-DTSTAMP:20261114T015506Z
+DTSTAMP:20261114T082325Z
 UID:sihf-2026-12-13-SUI-FIN-07-12-2026-13-12-2026-swiss-ice-hockey-g@iihf-
  swiss-hockey-men-schedule
 DESCRIPTION:Turnier: 07.12.2026 - 13.12.2026: SWISS Ice Hockey Games\nOrt:
@@ -251,7 +251,7 @@ BEGIN:VEVENT
 SUMMARY:Beijer Hockey Games · SWE – SUI
 DTSTART:20270213T150000Z
 DTEND:20270213T180000Z
-DTSTAMP:20261114T015506Z
+DTSTAMP:20261114T082325Z
 UID:sihf-2027-02-13-SWE-SUI-08-02-2027-14-02-2027-beijer-hockey-game@iihf-
  swiss-hockey-men-schedule
 DESCRIPTION:Turnier: 08.02.2027 - 14.02.2027: Beijer Hockey Games in SWE\n
@@ -263,7 +263,7 @@ BEGIN:VEVENT
 SUMMARY:Beijer Hockey Games · SUI – CZE
 DTSTART:20270214T110000Z
 DTEND:20270214T140000Z
-DTSTAMP:20261114T015506Z
+DTSTAMP:20261114T082325Z
 UID:sihf-2027-02-14-SUI-CZE-08-02-2027-14-02-2027-beijer-hockey-game@iihf-
  swiss-hockey-men-schedule
 DESCRIPTION:Turnier: 08.02.2027 - 14.02.2027: Beijer Hockey Games in SWE\n
