@@ -208,7 +208,14 @@ def fetch_realtime_games(
 ) -> list[IihfGame]:
     headers = {"User-Agent": user_agent}
     url = REALTIME_URL.format(event_id=event_id)
-    response = httpx.get(url, headers=headers, timeout=30.0)
+    try:
+        response = httpx.get(url, headers=headers, timeout=30.0)
+    except httpx.TransportError as exc:
+        print(
+            f"WARNING: IIHF realtime unreachable for event {event_id} ({exc}), "
+            "skipping live scores"
+        )
+        return []
     if response.status_code >= 400:
         print(
             f"WARNING: IIHF realtime {response.status_code} for event {event_id}, "
